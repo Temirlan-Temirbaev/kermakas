@@ -5,7 +5,7 @@ import ArrowIcon from "@/../public/icons/arrow.svg"
 
 export const ProductCard = ({name, img, thickness, width, length, id} : IProduct) => {
   const router = useRouter()
-  return <div className="w-1/3 min-h-[558px] relative bg-white100">
+  return <div className="w-1/3 min-h-[558px] relative bg-white100 border-2 border-gray40">
     <img src={img} alt="" className="w-full max-h-[267px]" />
     <div className="pl-5 py-3">
       <h1 className="text-3xl font-bold text-black mb-7">{name}</h1>

@@ -8,6 +8,7 @@ export const PRODUCTS: IProduct[] = [
     width: 100,
     length: 5,
     thickness: 40,
+    price: 10000
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ export const PRODUCTS: IProduct[] = [
     width: 120,
     length: 10,
     thickness: 30,
+    price : 5000
   },
   {
     id: 3,
@@ -24,5 +26,6 @@ export const PRODUCTS: IProduct[] = [
     width: 140,
     length: 15,
     thickness: 20,
+    price : 2000
   },
 ];

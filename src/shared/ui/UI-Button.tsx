@@ -16,8 +16,9 @@ const Button = ({variant, ...props} : UIButtonProps) => {
   if (variant === ButtonTypes.Primary) additionalStyles = "h-[70px] bg-primary"
   if (variant === ButtonTypes.Secondary) additionalStyles = "h-[50px] bg-primary"
   if (variant === ButtonTypes.Standard) additionalStyles = ""
-  return <button 
-  className={`flex justify-center items-center ${additionalStyles} ${props.className}`}>
+  return <button
+  {...props} 
+  className={`flex justify-center items-center ${additionalStyles} ${props.className}`} >
     {props.children}
   </button>
 }

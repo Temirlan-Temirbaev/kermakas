@@ -5,4 +5,5 @@ export interface IProduct {
   width: number;
   length: number;
   thickness: number;
+  price: number
 }

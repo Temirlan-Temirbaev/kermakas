@@ -1,4 +1,4 @@
-import { PRODUCTION_PROCESS_SLIDES, IProductionProcessSlide } from "@/shared/constants/home/productionProcessSlides"
+import { PRODUCTION_PROCESS_SLIDES, IProductionProcessSlide } from "../model"
 import { useState } from "react";
 import { useSpringCarousel } from "react-spring-carousel"
 import ArrowIcon from "@/../public/icons/arrow.svg";

@@ -1,14 +1,15 @@
 import withLayout from "@/shared/ui/layout/withLayout";
-import { OurProducts, ProductionProcess } from "@/widgets/home";
-// import { Manrope } from "next/font/google";
-
-// const manrope = Manrope({ subsets: ["latin", "cyrillic"] });
+import { Calculator } from "@/widgets/calculator";
+import { OurAdvantages, OurProducts, OurProjects, ProductionProcess } from "@/widgets/home";
 
 function Home() {
   return (
     <>
       <OurProducts />
       <ProductionProcess />
+      <Calculator />
+      <OurAdvantages />
+      <OurProjects />
     </>
   );
 }
