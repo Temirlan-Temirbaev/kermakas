@@ -7,8 +7,6 @@ import { ProcessSlide } from "@/entities/production-process";
 
 
 export const ProductionProcess = ({initialData} : {initialData : IProductionProcess[]}) => {
-  console.log(initialData);
-  
   const [activeSlideId, setActiveSlideId] = useState<number>(initialData[0].id)
   const {
     carouselFragment, 
