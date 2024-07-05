@@ -18,7 +18,6 @@ export const ProjectSlide = ({id, attributes} : IProject) => {
   };
   useEffect(() => {
     if (container.current) {
-      // Animation using ScrollTrigger
       gsap.fromTo(
         container.current.querySelector(".project-title"),
         { opacity: 0, y: 50 },
@@ -29,7 +28,7 @@ export const ProjectSlide = ({id, attributes} : IProject) => {
           ease: "power3.inOut",
           scrollTrigger: {
             trigger: container.current,
-            start: "top 80%", // Adjust start position as needed
+            start: "top 80%",
             toggleActions: "play none none reverse",
           },
         }
@@ -38,7 +37,7 @@ export const ProjectSlide = ({id, attributes} : IProject) => {
   }, []);
 
   return <div 
-  onClick={() => router.push(`/project/${id}`)}
+  onClick={() => router.push(`/projects/${id}`)}
   ref={container} 
   className="w-[100%] h-[300px] cursor-pointer" style={imgBg}>
     <div className="w-full h-full p-3">

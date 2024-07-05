@@ -2,10 +2,6 @@ import { IProductionProcess } from "../model";
 
 export const ProcessSlide = ({attributes, number} : {number: number} & IProductionProcess) => {
   const {title, image} = attributes;
-  console.log(attributes);
-  
-  console.log(image.data.attributes.url);
-  
   const imgBg = {
     background: `url(\'${process.env.NEXT_PUBLIC_API_BASE_URL}${image.data.attributes.url}\')`,
     backgroundPosition: "center",
