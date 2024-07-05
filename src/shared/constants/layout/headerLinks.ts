@@ -8,10 +8,10 @@ export const HEADER_LINKS: HeaderLink[] = [
     path: "/",
     title: "Главная",
   },
-  {
-    path: "/services",
-    title: "Услуги",
-  },
+  // {
+    // path: "/services",
+    // title: "Услуги",
+  // },
   {
     path: "/products",
     title: "Продукция",

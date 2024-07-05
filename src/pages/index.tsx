@@ -1,17 +1,35 @@
+import { IProductionProcess, getProductionProcesses } from "@/entities/production-process";
+import { IProject, getProjects } from "@/entities/project";
+import { BannerProps } from "@/shared/ui/layout/Banner";
 import withLayout from "@/shared/ui/layout/withLayout";
 import { Calculator } from "@/widgets/calculator";
 import { OurAdvantages, OurProducts, OurProjects, ProductionProcess } from "@/widgets/home";
-
-function Home() {
+export const getStaticProps = async () => {
+  const productionProcessData = await getProductionProcesses()
+  const projectsData = await getProjects()
+  return {
+    props: {
+      processData: productionProcessData,
+      projects: projectsData
+    },
+  };
+};
+function Home({processData, projects} : {processData: IProductionProcess[], projects: IProject[]}) {
   return (
     <>
       <OurProducts />
-      <ProductionProcess />
+      <ProductionProcess initialData={processData} />
       <Calculator />
       <OurAdvantages />
-      <OurProjects />
+      <OurProjects initialData={projects} />
     </>
   );
 }
 
-export default withLayout(Home, {title : "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", subTitle : "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", button : "Заказать проект"})
+const bannerOptions: BannerProps = {
+  title : "ЗАВОД ПО ПРОИЗВОДСТВУ СЭНДВИЧ-ПАНЕЛЕЙ KERMAKAS",
+  subTitle : "Завод «KERMAKAS» находится в Алматинской области и специализируется на производстве сэндвич-панелей с 2009 года. Мы используем передовое оборудование и технологии, включая надежную систему замка Z-LOCK, для производства стеновых и кровельных панелей высокого качества.",
+  button : "Заказать проект"
+}
+// @ts-ignore
+export default withLayout(Home, bannerOptions)

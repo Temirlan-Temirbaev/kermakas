@@ -1,26 +1,13 @@
-import { PRODUCTION_PROCESS_SLIDES, IProductionProcessSlide } from "../model"
 import { useState } from "react";
 import { useSpringCarousel } from "react-spring-carousel"
 import ArrowIcon from "@/../public/icons/arrow.svg";
+import { IProductionProcess } from "@/entities/production-process";
+import { ProcessSlide } from "@/entities/production-process";
 
-const ProcessSlide = ({id, name, img, number} : {number: number} & IProductionProcessSlide) => {
-  const imgBg = {
-    background: `url(\'${img}\')`,
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "contain",
-  };
-  return <div className="w-[390px] h-[450px]">
-    <div className="w-full h-[380px] flex items-end justify-start pl-4" style={imgBg}>
-      <p className="text-white100 text-opacity-60 font-bold text-[90px]">{number}</p>
-    </div>
-    <div className="w-full flex items-center justify-center h-[70px]">
-      <p className="text-black font-bold text-4xl">{name}</p>
-    </div>
-  </div>
-}
 
-export const ProductionProcess = () => {
+
+export const ProductionProcess = ({initialData} : {initialData : IProductionProcess[]}) => {
+  const [activeSlideId, setActiveSlideId] = useState<number>(initialData[0].id)
   const {
     carouselFragment, 
     slideToNextItem, 
@@ -29,19 +16,15 @@ export const ProductionProcess = () => {
   } = useSpringCarousel({
     itemsPerSlide: 3,
     withLoop: true,
-    freeScroll : true,
-    items : PRODUCTION_PROCESS_SLIDES.map((slide, i) => ({
-      id: slide.id,
-      renderItem: (
-        <ProcessSlide {...slide} key={slide.id + slide.name} number={i + 1} />
-      )
-    }))
-  })
-
-  const [activeSlideId, setActiveSlideId] = useState<number>(PRODUCTION_PROCESS_SLIDES[0].id)
-  
-  return <div className="w-full h-[900px]">
-    <div className="w-full max-w-[1300px] overflow-hidden h-full flex flex-col items-center mx-auto pt-6 pb-16">
+    items : initialData.map((slide, i) => {
+      return {
+        id: slide.id,
+        renderItem: <ProcessSlide key={`process-slide-${slide.attributes.title}`} {...slide} number={i+1} />
+      }
+    }) 
+  })  
+  return <div className="w-full">
+    <div className="w-full max-w-[1200px] overflow-hidden h-full flex flex-col items-center mx-auto pt-6 pb-16">
       <h1 className="text-gray80 font-bold text-[60px] mb-10">
         Процесс <span className="border-b-[4px] border-primary pb-4">производства</span> панелей
       </h1>
@@ -54,10 +37,11 @@ export const ProductionProcess = () => {
           className={"w-6 h-6 rotate-180 cursor-pointer"}
           onClick={() => {
             slideToPrevItem();
-            setActiveSlideId(prev => (prev === 1 ? PRODUCTION_PROCESS_SLIDES.slice(-1)[0].id : prev))
+            
+            setActiveSlideId(prev => (prev === 1 ? initialData.slice(-1)[0].id : prev - 1))
           }}
         />
-        {PRODUCTION_PROCESS_SLIDES.map(slide => {
+        {initialData.map(slide => {
           const activeStyles = "w-7 bg-gray80"
           return <div 
           className={`w-3 h-3 bg-gray60 cursor-pointer 
@@ -67,13 +51,13 @@ export const ProductionProcess = () => {
             slideToItem(slide.id - 1);
             setActiveSlideId(slide.id);
           }}
-          key={`slide-btn-${slide.id}-${slide.name}`}>
+          key={`slide-btn-${slide.id}-${slide.attributes.title}`}>
           </div>
         })}
         <ArrowIcon
         onClick={() => {
           slideToNextItem();
-          setActiveSlideId(prev => (prev === PRODUCTION_PROCESS_SLIDES.slice(-1)[0].id ? 1 : prev + 1))
+          setActiveSlideId(prev => (prev === initialData.slice(-1)[0].id ? 1 : prev + 1))
         }}
           className={"w-6 h-6 cursor-pointer"}
         />

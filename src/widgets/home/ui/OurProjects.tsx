@@ -1,21 +1,10 @@
 import ArrowIcon from "@/../public/icons/arrow.svg"
 import { useSpringCarousel } from "react-spring-carousel"
-import { IProject, OUR_PROJECTS_SLIDES } from "../model";
 import { UIButton } from "@/shared/ui/UI-Button";
 import { useRouter } from "next/router";
+import { IProject, ProjectSlide } from "@/entities/project";
 
-const ProjectSlide = ({id, img} : IProject) => {
-  const imgBg = {
-    background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(\'${img}\')`,
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-  };
-  return <div className="w-[100%] h-[300px]" style={imgBg}>
-  </div>
-}
-
-export const OurProjects = () => {
+export const OurProjects = ({initialData} : {initialData: IProject[]}) => {
   const {
     carouselFragment, 
     slideToNextItem, 
@@ -23,10 +12,10 @@ export const OurProjects = () => {
   } = useSpringCarousel({
     itemsPerSlide: 3,
     withLoop: true,
-    items : OUR_PROJECTS_SLIDES.map((slide) => ({
+    items : initialData.map((slide) => ({
       id: slide.id,
       renderItem: (
-        <ProjectSlide {...slide} key={`project-slide-${slide.id}`}/>
+        <ProjectSlide key={`project-slide-${slide.id}`} {...slide} />
       )
     }))
   })
@@ -50,7 +39,7 @@ export const OurProjects = () => {
         {carouselFragment}
       </div>
       <div className="w-full flex justify-end">
-        <UIButton.Primary className="w-[280px]" onClick={() => router.push("/products")}>
+        <UIButton.Primary className="w-[280px]" onClick={() => router.push("/projects")}>
           <p className="text-white100 font-bold text-xl">
             Все проекты
           </p>
