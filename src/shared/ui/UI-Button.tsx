@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, HTMLAttributes } from "react"
+import { ButtonHTMLAttributes } from "react"
 
 enum ButtonTypes {
   Primary = "primary",

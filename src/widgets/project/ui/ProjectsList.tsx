@@ -18,8 +18,10 @@ export const ProjectsList = ({projects} : {projects : IProject[]}) => {
           ease: "power3.inOut",
           scrollTrigger: {
             trigger: container.current,
-            start: "top 80%",
+            // start: "top 80%",
             toggleActions: "play none none reverse",
+            start : "top center",
+            end : "bottom center"
           },
         }
       );
