@@ -7,7 +7,9 @@ import { ProcessSlide } from "@/entities/production-process";
 
 
 export const ProductionProcess = ({initialData} : {initialData : IProductionProcess[]}) => {
-  const [activeSlideId, setActiveSlideId] = useState<number>(initialData[0].id)
+  const firstItemId = initialData[0].id;
+  const lastItemId = initialData.slice(-1)[0].id;
+  const [activeSlideId, setActiveSlideId] = useState<number>(firstItemId)
   const {
     carouselFragment, 
     slideToNextItem, 
@@ -18,11 +20,12 @@ export const ProductionProcess = ({initialData} : {initialData : IProductionProc
     withLoop: true,
     items : initialData.map((slide, i) => {
       return {
-        id: slide.id,
+        id: `production-slide-${slide.id}`,
         renderItem: <ProcessSlide key={`process-slide-${slide.attributes.title}`} {...slide} number={i+1} />
       }
     }) 
-  })  
+  })
+
   return <div className="w-full">
     <div className="w-full max-w-[1200px] overflow-hidden h-full flex flex-col items-center mx-auto pt-6 pb-16">
       <h1 className="text-gray80 font-bold text-[60px] mb-10">
@@ -37,18 +40,18 @@ export const ProductionProcess = ({initialData} : {initialData : IProductionProc
           className={"w-6 h-6 rotate-180 cursor-pointer"}
           onClick={() => {
             slideToPrevItem();
-            
-            setActiveSlideId(prev => (prev === 1 ? initialData.slice(-1)[0].id : prev - 1))
+            setActiveSlideId(prev => (prev === firstItemId ? lastItemId : prev - 1))
           }}
         />
         {initialData.map(slide => {
           const activeStyles = "w-7 bg-gray80"
+          console.log(slide.id)
           return <div 
           className={`w-3 h-3 bg-gray60 cursor-pointer 
             transition-all delay-50 ease-linear
             ${activeSlideId === slide.id && activeStyles}`}
           onClick={() => {
-            slideToItem(slide.id - 1);
+            slideToItem(`production-slide-${slide.id}`);
             setActiveSlideId(slide.id);
           }}
           key={`slide-btn-${slide.id}-${slide.attributes.title}`}>
@@ -57,7 +60,7 @@ export const ProductionProcess = ({initialData} : {initialData : IProductionProc
         <ArrowIcon
         onClick={() => {
           slideToNextItem();
-          setActiveSlideId(prev => (prev === initialData.slice(-1)[0].id ? 1 : prev + 1))
+          setActiveSlideId(prev => (prev === lastItemId ? firstItemId : prev + 1))
         }}
           className={"w-6 h-6 cursor-pointer"}
         />
