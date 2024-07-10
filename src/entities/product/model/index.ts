@@ -1,2 +1,2 @@
 export type { IProduct } from "./product.interface";
-export * from "./products";
+export * from "./product.api";

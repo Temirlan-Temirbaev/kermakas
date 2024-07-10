@@ -45,7 +45,6 @@ export const ProductionProcess = ({initialData} : {initialData : IProductionProc
         />
         {initialData.map(slide => {
           const activeStyles = "w-7 bg-gray80"
-          console.log(slide.id)
           return <div 
           className={`w-3 h-3 bg-gray60 cursor-pointer 
             transition-all delay-50 ease-linear
