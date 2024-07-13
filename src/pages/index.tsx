@@ -1,3 +1,4 @@
+import { getProducts, IProduct } from "@/entities/product";
 import { IProductionProcess, getProductionProcesses } from "@/entities/production-process";
 import { IProject, getProjects } from "@/entities/project";
 import { BannerProps } from "@/shared/ui/layout/Banner";
@@ -7,17 +8,19 @@ import { OurAdvantages, OurProducts, OurProjects, ProductionProcess } from "@/wi
 export const getStaticProps = async () => {
   const productionProcessData = await getProductionProcesses()
   const projectsData = await getProjects()
+  const products = await getProducts(3)
   return {
     props: {
       processData: productionProcessData,
-      projects: projectsData
+      projects: projectsData,
+      products
     },
   };
 };
-function Home({processData, projects} : {processData: IProductionProcess[], projects: IProject[]}) {
+function Home({processData, projects, products} : {processData: IProductionProcess[], projects: IProject[], products: IProduct[]}) {
   return (
     <>
-      <OurProducts />
+      <OurProducts initialData={products} />
       <ProductionProcess initialData={processData} />
       <Calculator />
       <OurAdvantages />

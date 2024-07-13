@@ -1,7 +1,6 @@
 import { UIButton } from "@/shared/ui/UI-Button";
 import { useState } from "react"
 import { getPrice } from "../model";
-import { IProduct, PRODUCTS } from "@/entities/product";
 
 export const Calculator = () => {
   const [price, setPrice] = useState(0);
@@ -10,9 +9,9 @@ export const Calculator = () => {
 
   const handleClick = () => {
     if (!productId) return;
-    const product = PRODUCTS.find(product => product.id === productId)
-    if (!product) return;
-    setPrice(getPrice(product, square))
+    // const product = PRODUCTS.find(product => product.id === productId)
+    // if (!product) return;
+    // setPrice(getPrice(product, square))
   }
 
   return <div className="w-full h-[400px] bg-black">
@@ -30,7 +29,7 @@ export const Calculator = () => {
         </div>
         <div className="-mt-7">
           <p className="text-lg opacity-80 text-white100 font-light">Вид панели</p>
-          <select 
+          {/* <select 
           className="w-[300px] h-[50px] rounded-lg"
           onChange={e => setProductId(Number(e.target.value))}
           value={productId ? productId : PRODUCTS[0].id}>
@@ -41,7 +40,7 @@ export const Calculator = () => {
                 {product.name} (толщина {product.thickness}мм)
               </option>
             })}
-          </select>
+          </select> */}
         </div>
         <UIButton.Secondary 
           className="w-[250px] rounded-lg"

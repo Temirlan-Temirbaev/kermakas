@@ -3,18 +3,22 @@ import { IProduct } from "../model"
 import { UIButton } from "@/shared/ui/UI-Button"
 import ArrowIcon from "@/../public/icons/arrow.svg"
 
-export const ProductCard = ({name, img, thickness, width, length, id} : IProduct) => {
+export const ProductCard = ({attributes, id} : IProduct) => {
+  const {title, image} = attributes
+  const url = image.data.attributes.formats.small.url;
   const router = useRouter()
   return <div className="w-1/3 min-h-[558px] relative bg-white100 border-2 border-gray40">
-    <img src={img} alt="" className="w-full max-h-[267px]" />
-    <div className="pl-5 py-3">
-      <h1 className="text-3xl font-bold text-black mb-7">{name}</h1>
-      <p className="text-lg font-normal text-black opacity-60 mb-1">Стандартная ширина панели: {width}мм</p>
-      <p className="text-lg font-normal text-black opacity-60 mb-1">Длина панели: {length}м</p>
-      <p className="text-lg font-normal text-black opacity-60">Стандартная толщина панели: {thickness}мм</p>
+    <img src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${url}`} alt="" className="w-full max-h-[220px]" />
+    <div className="pl-5 py-3 pr-2 flex flex-col gap-y-2">
+      <h1 className="text-3xl font-bold text-black">{title}</h1>
+      {attributes.additional_info.map(info => {
+        return <p key={`product-${id}-${info.title}`} className="text-lg font-normal text-black opacity-60">
+          {info.description}: {info.value}
+        </p>
+      })}
     </div>
     <UIButton.Standard 
-      onClick={() => router.push(`/product/${id}`)}
+      onClick={() => router.push(`/products`)}
       className="absolute bottom-0 left-0 w-full h-[66px] border-t-2 border-gray40">
       <div className="flex gap-x-1 items-center">
         <p className="text-primary font-normal text-lg">Подробнее</p>
