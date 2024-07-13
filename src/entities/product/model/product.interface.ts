@@ -7,6 +7,7 @@ export interface IProduct {
     title: string;
     price_per_meter : number;
     image: IStrapiImage;
+    type: string;
     additional_info: AdditionalInfo[];
   }
 }
