@@ -5,14 +5,16 @@ import { PropsWithChildren, useEffect, useRef } from "react"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
 import ScrollTrigger from "gsap/dist/ScrollTrigger"
+import { IContact } from "./contact"
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
 export interface BannerProps extends PropsWithChildren {
   title : string
   subTitle : string
   button? : string
+  contacts? : IContact
 }
-export const Banner = ({title, subTitle, button, children} : BannerProps) => {
+export const Banner = ({title, subTitle, button, children, contacts} : BannerProps) => {
   const bannerBgStyles = {
     background: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(\'/images/banner.jpg\')',
     backgroundPosition: "center",
@@ -44,7 +46,7 @@ export const Banner = ({title, subTitle, button, children} : BannerProps) => {
 
   if (children) {
     return <div style={bannerBgStyles}>
-      <Header />
+      {contacts && <Header contacts={contacts}/>}
       <div className={`w-full mx-auto max-w-[1200px] border-x-[1px] ${DEFAULT_BORDER}`}>
         {children}
       </div>
@@ -52,8 +54,8 @@ export const Banner = ({title, subTitle, button, children} : BannerProps) => {
   }
 
   return <div style={bannerBgStyles} ref={containerRef}>
-    <Header />
-    <div className={`w-full mx-auto  max-w-[1200px] border-x-[1px] ${DEFAULT_BORDER} h-[840px] flex flex-col justify-center items-center`}>
+      {contacts && <Header contacts={contacts}/>}
+      <div className={`w-full mx-auto  max-w-[1200px] border-x-[1px] ${DEFAULT_BORDER} h-[840px] flex flex-col justify-center items-center`}>
       <h1 
       ref={titleRef}
       className="text-[36px] font-bold text-white100 mb-5 text-center">
