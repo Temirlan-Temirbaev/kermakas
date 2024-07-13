@@ -1,0 +1,23 @@
+export function smoothScrollAlmostToBottom(duration: number, offset: number): void {
+  const start: number = window.pageYOffset;
+  const end: number = document.body.scrollHeight - window.innerHeight - offset;
+  const distance: number = end - start;
+  let startTime: number | null = null;
+
+  function animation(currentTime: number): void {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed: number = currentTime - startTime;
+      const run: number = ease(timeElapsed, start, distance, duration);
+      window.scrollTo(0, run);
+      if (timeElapsed < duration) requestAnimationFrame(animation);
+  }
+
+  function ease(t: number, b: number, c: number, d: number): number {
+      t /= d / 2;
+      if (t < 1) return c / 2 * t * t + b;
+      t--;
+      return -c / 2 * (t * (t - 2) - 1) + b;
+  }
+
+  requestAnimationFrame(animation);
+}

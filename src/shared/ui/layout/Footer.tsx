@@ -1,16 +1,34 @@
-import { FOOTER_LINKS } from "@/shared/constants/layout/footerLinks"
+import { IContact } from "./contact"
+import { SVGLineElementAttributes } from "react";
+import TelegramIcon from "@/../public/icons/telegram.svg";
+import WhatsappIcon from "@/../public/icons/whatsapp.svg";
+import InstagramIcon from "@/../public/icons/instagram.svg";
+import Link from "next/link";
+type FooterLink = {
+  path: string;
+  Icon: (props: SVGLineElementAttributes<SVGLineElement>) => JSX.Element;
+};
 
-
-export const Footer = () => {
+export const Footer = ({contacts} : {contacts : IContact}) => {
+  const {telegram_link, whatsapp_link, instagram_link} = contacts.attributes
+  const links: FooterLink[] = [
+    {path : telegram_link, Icon : TelegramIcon},
+    {path : whatsapp_link, Icon : WhatsappIcon},
+    {path : instagram_link, Icon : InstagramIcon}
+  ]
+  console.log(links);
+  
   return <footer className="w-full h-[90px]">
     <div className="flex w-full max-w-[1200px] mx-auto h-full justify-between items-center">
-      <h1 className="text-white100 font-bold text-[42px]">Lorem</h1>
+      <h1 className="text-white100 font-bold text-[42px]">KERMAKAS</h1>
       <div className="flex flex-row items-center gap-x-5">
-        {FOOTER_LINKS.map(({Icon}, i) => (
-          <div key={`footer-icon-${i}`} className="w-[56px] h-[56px] bg-primary cursor-pointer rounded-full flex items-center justify-center">
+        {links.map(({Icon, path}, i) => {
+          if (!path || path.trim().trimEnd().trimStart().length === 0) return;
+          return (
+          <Link href={path} key={`footer-icon-${i}`} className="w-[56px] h-[56px] bg-primary cursor-pointer rounded-full flex items-center justify-center">
             <Icon className={"w-8 h-8 "}  />
-          </div>
-        ))}
+          </Link>
+        )})}
       </div>
     </div>
   </footer>

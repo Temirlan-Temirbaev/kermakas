@@ -18,7 +18,7 @@ const withLayout = (Page: React.ComponentType, BannerOptions: BannerProps) => {
         <Page {...pageProps} />
         <div style={bgStyles}>
           {data &&  <Contacts contacts={data} />}
-          <Footer />
+          {data &&  <Footer contacts={data} />}        
         </div>
       </div>
     </div>
