@@ -16,17 +16,15 @@ export const Footer = ({contacts} : {contacts : IContact}) => {
     {path : whatsapp_link, Icon : WhatsappIcon},
     {path : instagram_link, Icon : InstagramIcon}
   ]
-  console.log(links);
-  
   return <footer className="w-full h-[90px]">
-    <div className="flex w-full max-w-[1200px] mx-auto h-full justify-between items-center">
-      <h1 className="text-white100 font-bold text-[42px]">KERMAKAS</h1>
+    <div className="flex w-full px-5 xl:px-0 max-w-[1200px] mx-auto h-full justify-between items-center">
+      <h1 className="text-white100 font-bold text-3xl md:text-[42px]">KERMAKAS</h1>
       <div className="flex flex-row items-center gap-x-5">
         {links.map(({Icon, path}, i) => {
-          if (!path || path.trim().trimEnd().trimStart().length === 0) return;
+          if (!path || path.trim().trimEnd().trimStart().length === 1) return;
           return (
-          <Link href={path} key={`footer-icon-${i}`} className="w-[56px] h-[56px] bg-primary cursor-pointer rounded-full flex items-center justify-center">
-            <Icon className={"w-8 h-8 "}  />
+          <Link href={path} key={`footer-icon-${i}`} className="w-8 h-8 md:w-[56px] md:h-[56px] bg-primary cursor-pointer rounded-full flex items-center justify-center">
+            <Icon className={"w-6 h-6 md:w-8 md:h-8 "}  />
           </Link>
         )})}
       </div>
