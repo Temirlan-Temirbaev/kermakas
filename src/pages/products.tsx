@@ -140,8 +140,6 @@ const ProductsPage = () => {
     typedProducts[product.attributes.type].push(product)
   })
 
-  console.log(typedProducts);
-  
   return <>
     <div className="w-full max-w-[1200px] mx-auto">
       <div className="flex justify-between items-start py-20 min-h-[70vh]" ref={bannerRefs.container}>
