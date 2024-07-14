@@ -1,17 +1,22 @@
 import { UIButton } from "@/shared/ui/UI-Button";
 import { useState } from "react"
 import { getPrice } from "../model";
+import useSWR from "swr";
+import { getProducts } from "@/entities/product";
 
 export const Calculator = () => {
+  const {data} = useSWR("/api/getProducts", () => getProducts());
   const [price, setPrice] = useState(0);
   const [square, setSquare] = useState(0);
   const [productId, setProductId] = useState<null | number>(null);
 
+  if(!data) return <div>Загрузка</div>
+
   const handleClick = () => {
     if (!productId) return;
-    // const product = PRODUCTS.find(product => product.id === productId)
-    // if (!product) return;
-    // setPrice(getPrice(product, square))
+    const product = data.find(product => product.id === productId)
+    if (!product) return;
+    setPrice(getPrice(product, square))
   }
 
   return <div className="w-full h-[400px] bg-black">
@@ -29,18 +34,20 @@ export const Calculator = () => {
         </div>
         <div className="-mt-7">
           <p className="text-lg opacity-80 text-white100 font-light">Вид панели</p>
-          {/* <select 
+          <select 
           className="w-[300px] h-[50px] rounded-lg"
           onChange={e => setProductId(Number(e.target.value))}
-          value={productId ? productId : PRODUCTS[0].id}>
-            {PRODUCTS.map(product => {
+          value={productId ? productId : data[0].id}>
+            {data.map(product => {
+              let additional: string[] = []
+              product.attributes.additional_info.slice(0,2).map(info => additional.push(`${info.title} ${info.value}`))
               return <option 
               value={product.id}
               key={`product-option-${product.id}`}>
-                {product.name} (толщина {product.thickness}мм)
+                {product.attributes.title} {additional.map(info => `(${info}) `)} 
               </option>
             })}
-          </select> */}
+          </select>
         </div>
         <UIButton.Secondary 
           className="w-[250px] rounded-lg"

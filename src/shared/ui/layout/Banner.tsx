@@ -5,14 +5,18 @@ import { PropsWithChildren, useEffect, useRef } from "react"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
 import ScrollTrigger from "gsap/dist/ScrollTrigger"
+import { IContact } from "./contact"
+import { smoothScrollAlmostToBottom } from "@/shared/utils/smoothScroll"
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
 export interface BannerProps extends PropsWithChildren {
   title : string
   subTitle : string
   button? : string
+  contacts? : IContact
+  buttonHandler? : () => void;
 }
-export const Banner = ({title, subTitle, button, children} : BannerProps) => {
+export const Banner = ({title, subTitle, button, children, contacts, buttonHandler} : BannerProps) => {
   const bannerBgStyles = {
     background: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(\'/images/banner.jpg\')',
     backgroundPosition: "center",
@@ -44,7 +48,7 @@ export const Banner = ({title, subTitle, button, children} : BannerProps) => {
 
   if (children) {
     return <div style={bannerBgStyles}>
-      <Header />
+      {contacts && <Header contacts={contacts}/>}
       <div className={`w-full mx-auto max-w-[1200px] border-x-[1px] ${DEFAULT_BORDER}`}>
         {children}
       </div>
@@ -52,8 +56,8 @@ export const Banner = ({title, subTitle, button, children} : BannerProps) => {
   }
 
   return <div style={bannerBgStyles} ref={containerRef}>
-    <Header />
-    <div className={`w-full mx-auto  max-w-[1200px] border-x-[1px] ${DEFAULT_BORDER} h-[840px] flex flex-col justify-center items-center`}>
+      {contacts && <Header contacts={contacts}/>}
+      <div className={`w-full mx-auto  max-w-[1200px] border-x-[1px] ${DEFAULT_BORDER} h-[840px] flex flex-col justify-center items-center`}>
       <h1 
       ref={titleRef}
       className="text-[36px] font-bold text-white100 mb-5 text-center">
@@ -64,7 +68,10 @@ export const Banner = ({title, subTitle, button, children} : BannerProps) => {
        className="mb-5 text-white90 text-opacity-70 text-lg text-center">
         {subTitle}
         </h4>
-      {button && <div ref={buttonRef}><UIButton.Primary 
+      {button && <div ref={buttonRef}><UIButton.Primary
+      onClick={() => {
+        if (!buttonHandler) smoothScrollAlmostToBottom(2000, 200)
+      }}
       className="w-[400px] transition-all delay-50 ease-linear hover:bg-opacity-0 hover:border-[2px] hover:border-primary rounded-[10px]">
         <p className="text-white100 font-bold text-2xl">{button}</p>
       </UIButton.Primary></div>}

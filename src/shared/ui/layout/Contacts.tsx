@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { UIButton } from "../UI-Button"
-import { ContactCard } from "./contact";
+import { ContactCard, IContact } from "./contact";
 import { toast } from "react-toastify";
 import { client } from "@/shared/utils/api";
 
-export const Contacts = () => {
+export const Contacts = ({contacts} : {contacts : IContact}) => {
   const [name, setName] = useState("")
   const [phone, setPhone] = useState("")
   const [mail, setMail] = useState("")
@@ -76,7 +76,7 @@ export const Contacts = () => {
           </UIButton.Primary>
         </div>
       </div>
-      <ContactCard />
+      <ContactCard contacts={contacts} />
     </div>
   </div>
 }

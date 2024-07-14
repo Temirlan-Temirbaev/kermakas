@@ -1,14 +1,15 @@
-import Logo from "@/../public/logo.svg"
 import { DEFAULT_BORDER } from "@/shared/constants/layout/borderStyle"
 import { HEADER_LINKS } from "@/shared/constants/layout/headerLinks"
 import Link from "next/link"
 import { useRouter } from "next/router"
+import { IContact } from "./contact"
 
-export const Header = () => {
+export const Header = ({contacts} : {contacts : IContact}) => {
   const router = useRouter();
+  const {phone} = contacts.attributes
   return <header className={`w-full h-[120px] border-b-[1px]  ${DEFAULT_BORDER}`}>
     <div className={`max-w-[1200px] w-full h-full mx-auto  border-x-[1px]  ${DEFAULT_BORDER} flex items-center justify-between`}>
-      <Logo width={120} height={120} />
+      <h1 className="ml-5 text-3xl text-white100">KERMAKAS</h1>
       <nav className="flex gap-x-8">
         {HEADER_LINKS.map(link => {
           const activeStyles = "opacity-100 underline"
@@ -28,7 +29,11 @@ export const Header = () => {
           }
         )}
       </nav>
-      <a href="tel:77777777777" className="underline text-lg text-white100 font-bold mr-3">+7 777 777 77 77</a>
+      <a 
+        href={`tel:${phone}`} 
+        className="underline text-lg text-white100 font-bold mr-3">
+        {phone}
+      </a>
     </div>
   </header>
 }

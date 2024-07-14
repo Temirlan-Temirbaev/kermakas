@@ -11,6 +11,7 @@ import { UIButton } from "@/shared/ui/UI-Button"
 import { useRef } from "react"
 import useSWR from "swr"
 import { CharacteristicTable, getProducts, IProduct } from "@/entities/product"
+import { smoothScrollToElement } from "@/shared/utils/smoothScroll"
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger)
 const ProductsPage = () => {
@@ -37,6 +38,8 @@ const ProductsPage = () => {
     button : useRef<HTMLDivElement | null>(null),
     image : useRef<HTMLImageElement | null>(null),
   }
+
+  const tableRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(() => {
     const {title, paragraph, button, image} = bannerRefs
@@ -137,8 +140,6 @@ const ProductsPage = () => {
     typedProducts[product.attributes.type].push(product)
   })
 
-  console.log(typedProducts);
-  
   return <>
     <div className="w-full max-w-[1200px] mx-auto">
       <div className="flex justify-between items-start py-20 min-h-[70vh]" ref={bannerRefs.container}>
@@ -151,6 +152,7 @@ const ProductsPage = () => {
           </p>
           <div ref={bannerRefs.button}>
             <UIButton.Secondary
+            onClick={() => smoothScrollToElement(wallRefs.container, 2000)}
             className="px-10 rounded-md text-white100 
             font-medium text-xl hover:bg-opacity-0 
             hover:border-primary hover:border-[1px]
@@ -184,6 +186,7 @@ const ProductsPage = () => {
           </ul>
           <div ref={wallRefs.button}>
             <UIButton.Secondary
+              onClick={() => smoothScrollToElement(tableRef, 2000)}
               className="px-10 rounded-md text-white100 
               font-medium text-xl hover:bg-opacity-0 
               hover:border-primary hover:border-[1px]
@@ -218,6 +221,7 @@ const ProductsPage = () => {
         </ul>
         <div ref={roofRefs.button}>
           <UIButton.Secondary
+            onClick={() => smoothScrollToElement(tableRef, 1500)}
             className="px-10 rounded-md text-white100 
             font-medium text-xl hover:bg-opacity-0 
            hover:border-primary hover:border-[1px]
@@ -229,7 +233,7 @@ const ProductsPage = () => {
       </div>
       <Image alt="" className="max-w-[40%]" src={RoofPanelImage} ref={roofRefs.image}/>
       </div>
-      <div className="flex flex-col gap-y-5 mb-5 overflow-x-auto">
+      <div className="flex flex-col gap-y-5 mb-5 overflow-x-auto" ref={tableRef}>
         {Object.keys(typedProducts).map(type => (
           <div key={`product-table-${type}`}>
             <h1 className="text-black font-bold text-2xl text-center">{type}</h1>
