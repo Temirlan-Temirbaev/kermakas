@@ -54,7 +54,6 @@ const ProductsPage = () => {
       });
       gsap.from(image.current, {
         opacity: 0,
-        x: 300,
         duration: 1,
         ease: "power3.out",
         delay: 0.2,
@@ -140,10 +139,11 @@ const ProductsPage = () => {
     typedProducts[product.attributes.type].push(product)
   })
 
+
   return <>
     <div className="w-full max-w-[1200px] mx-auto">
       <div className="flex justify-between items-start py-20 min-h-[70vh]" ref={bannerRefs.container}>
-        <div className="flex flex-col gap-y-5">
+        <div className="w-full items-center justify-center sm:items-start sm:justify-start sm:max-w-[50%] flex flex-col gap-y-5 px-5">
           <h1 className="font-bold text-black text-[50px]" ref={bannerRefs.title}>
             Продукция завода <span className="text-primary">KERMAKAS</span>
           </h1>
@@ -162,11 +162,11 @@ const ProductsPage = () => {
             </UIButton.Secondary>
           </div>
         </div>        
-        <Image alt="" className="max-w-[50%] h-full" src={BannerImage} ref={bannerRefs.image}/>
+        <Image alt="" className="hidden sm:flex sm:max-w-[50%] h-full" src={BannerImage} ref={bannerRefs.image}/>
       </div>
-      <div className="flex justify-between items-start py-20 min-h-[90vh]" ref={wallRefs.container}>
-        <Image alt="" className="min-w-[50%]" src={WallPanelImage} ref={wallRefs.image}/>
-        <div className="flex flex-col gap-y-5 items-start w-1/2">
+      <div className="flex justify-between items-start py-20 px-5" ref={wallRefs.container}>
+        <Image alt="" className="hidden md:flex md:min-w-[50%]" src={WallPanelImage} ref={wallRefs.image}/>
+        <div className="w-full flex flex-col gap-y-5 items-start md:w-1/2">
           <h1 className="font-bold text-black text-4xl" ref={wallRefs.title}>
             <span className="text-primary">Стеновые</span> сэндвич панели
           </h1>
@@ -200,8 +200,8 @@ const ProductsPage = () => {
     </div>
     <Calculator />
     <div className="w-full max-w-[1200px] mx-auto">
-      <div className="flex justify-between items-start py-20 min-h-[90vh]" ref={roofRefs.container}>
-      <div className="flex flex-col gap-y-5 items-start w-1/2">
+      <div className="flex justify-between items-start py-20 px-5" ref={roofRefs.container}>
+      <div className="w-full flex flex-col gap-y-5 items-start md:w-1/2">
         <h1 className="font-bold text-black text-4xl" ref={roofRefs.title}>
             <span className="text-primary">Кровельные</span> сэндвич панели
         </h1>
@@ -231,11 +231,11 @@ const ProductsPage = () => {
           </UIButton.Secondary>
         </div>
       </div>
-      <Image alt="" className="max-w-[40%]" src={RoofPanelImage} ref={roofRefs.image}/>
+      <Image alt="" className="hidden md:flex max-w-[50%]" src={RoofPanelImage} ref={roofRefs.image}/>
       </div>
-      <div className="flex flex-col gap-y-5 mb-5 overflow-x-auto" ref={tableRef}>
+      <div className="flex flex-col gap-y-5 mb-5 px-5 overflow-x-hidden" ref={tableRef}>
         {Object.keys(typedProducts).map(type => (
-          <div key={`product-table-${type}`}>
+          <div key={`product-table-${type}`} className="w-full overflow-x-auto">
             <h1 className="text-black font-bold text-2xl text-center">{type}</h1>
             <CharacteristicTable products={typedProducts[type]}/>
           </div>

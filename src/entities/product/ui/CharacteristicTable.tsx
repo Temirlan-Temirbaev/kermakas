@@ -13,7 +13,7 @@ export const CharacteristicTable = ({products} : {products : IProduct[]}) => {
   })
 
   return (
-    <table className="characteristic-table">
+    <table>
       <tbody>
         {Object.keys(rows).map(rowKey => (
           <tr key={rowKey}>
