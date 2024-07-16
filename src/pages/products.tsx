@@ -29,6 +29,7 @@ const ProductsPage = () => {
     container : useRef<HTMLDivElement | null>(null),
     button : useRef<HTMLDivElement | null>(null),
     image : useRef<HTMLImageElement | null>(null),
+    smallImage : useRef<HTMLImageElement | null>(null),
   }
 
   const roofRefs = {
@@ -37,6 +38,7 @@ const ProductsPage = () => {
     container : useRef<HTMLDivElement | null>(null),
     button : useRef<HTMLDivElement | null>(null),
     image : useRef<HTMLImageElement | null>(null),
+    smallImage : useRef<HTMLImageElement | null>(null),
   }
 
   const tableRef = useRef<HTMLDivElement | null>(null);
@@ -62,7 +64,7 @@ const ProductsPage = () => {
   }, {scope : bannerRefs.container})
 
   useGSAP(() => {
-    const {title, list, button, image, container} = wallRefs
+    const {title, list, button, image, container, smallImage} = wallRefs
     if (title.current && list.current && button.current && image.current) {
       gsap.from([title.current, list.current, button.current], {
         opacity: 0,
@@ -79,25 +81,23 @@ const ProductsPage = () => {
           end : "bottom center"
         },
       });
-      gsap.from(image.current, {
+      gsap.from([image.current, smallImage.current], {
         opacity: 0,
-        y: 50,
         duration: 1,
         ease: "power3.out",
         delay: 0.2,
         scrollTrigger: {
           trigger: container.current,
-          // start: "top 80%",
-          toggleActions: "play none none reverse",
-          start : "top center",
-          end : "bottom center"
-        },
+            toggleActions: "play pause resume none",
+            start : "top center",
+            end : "bottom center"
+        }
       })
     }
   }, {scope : wallRefs.container})
 
   useGSAP(() => {
-    const {title, list, button, image, container} = roofRefs
+    const {title, list, button, image, smallImage, container} = roofRefs
     if (title.current && list.current && button.current && image.current) {
       gsap.from([title.current, list.current, button.current], {
         opacity: 0,
@@ -114,7 +114,7 @@ const ProductsPage = () => {
           end : "bottom center"
         },
       });
-      gsap.from(image.current, {
+      gsap.from([image.current, smallImage.current], {
         opacity: 0,
         y: 50,
         duration: 1,
@@ -170,6 +170,7 @@ const ProductsPage = () => {
           <h1 className="font-bold text-black text-4xl" ref={wallRefs.title}>
             <span className="text-primary">Стеновые</span> сэндвич панели
           </h1>
+          <Image alt="" className="flex md:hidden" src={WallPanelImage} ref={wallRefs.smallImage}/>
           <ul ref={wallRefs.list} className="list-disc ml-5 text-black text-opacity-60 text-xl flex flex-col gap-y-3">
             <li>
               Надёжный и долговечный материал
@@ -205,6 +206,7 @@ const ProductsPage = () => {
         <h1 className="font-bold text-black text-4xl" ref={roofRefs.title}>
             <span className="text-primary">Кровельные</span> сэндвич панели
         </h1>
+        <Image alt="" className="flex md:hidden" src={RoofPanelImage} ref={roofRefs.smallImage}/>
         <ul ref={roofRefs.list} className="list-disc ml-5 text-black text-opacity-60 text-xl flex flex-col gap-y-3">
           <li>
             Надёжный и экономичный материал, из которого можно сделать крышу практически любого объекта 
