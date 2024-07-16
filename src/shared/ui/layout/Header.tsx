@@ -30,12 +30,15 @@ export const Header = ({ contacts }: { contacts: IContact }) => {
       gsap.to(topBar.current, { y: 8, rotation: 45, duration: 0.2 });
       gsap.to(bottomBar.current, { y: -8, rotation: -45, duration: 0.2 });
       gsap.to([topBar.current, middleBar.current, bottomBar.current], { backgroundColor: "#000", duration: 0.2 });
+      gsap.to(menuRef.current, {opacity : 1, duration : 0.5, ease : "power3.out"})
       document.body.style.overflow = 'hidden';
     } else {
       gsap.to(middleBar.current, { opacity: 1, duration: 0.1 });
       gsap.to(topBar.current, { y: 0, rotation: 0, duration: 0.2 });
       gsap.to(bottomBar.current, { y: 0, rotation: 0, duration: 0.2 });
       gsap.to([topBar.current, middleBar.current, bottomBar.current], { backgroundColor: "#fff", duration: 0.2 });
+      gsap.to(menuRef.current, {opacity : 0, duration : 0.5, ease : "power3.out"})
+
       document.body.style.overflow = '';
     }
 
@@ -87,7 +90,9 @@ export const Header = ({ contacts }: { contacts: IContact }) => {
       {menuOpen && (
         <div 
         ref={menuRef} 
-        className="absolute right-0 top-0 h-full w-[320px] py-2 px-2 bg-gray-800 text-white rounded shadow-lg bg-white100 flex justify-center items-center flex-col z-[2] gap-y-3">
+        className="absolute right-0 top-0 h-full w-[320px] py-2 px-2 bg-gray-800 
+        text-white rounded shadow-lg bg-white100 flex justify-center 
+        items-center flex-col z-[2] gap-y-3 opacity-0">
           {HEADER_LINKS.map(link => {
             const activeStyles = "opacity-100 underline"
             const inactiveStyles = "opacity-70"
