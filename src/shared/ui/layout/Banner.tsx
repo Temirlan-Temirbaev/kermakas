@@ -57,22 +57,23 @@ export const Banner = ({title, subTitle, button, children, contacts, buttonHandl
 
   return <div style={bannerBgStyles} ref={containerRef}>
       {contacts && <Header contacts={contacts}/>}
-      <div className={`w-full mx-auto  max-w-[1200px] border-x-[1px] ${DEFAULT_BORDER} h-[840px] flex flex-col justify-center items-center`}>
+      <div className={`w-full mx-auto px-5 md:px-0  max-w-[1200px] border-x-[1px] ${DEFAULT_BORDER} h-[80vh] flex flex-col justify-center items-center`}>
       <h1 
       ref={titleRef}
-      className="text-[36px] font-bold text-white100 mb-5 text-center">
+      className="text-lg sm:text-3xl xl:text-[36px] font-bold text-white100 mb-5 text-center">
         {title}
       </h1>
       <h4
       ref={subTitleRef}
-       className="mb-5 text-white90 text-opacity-70 text-lg text-center">
+       className="mb-5 text-white90 text-opacity-70 text-sm sm:text-md md:text-lg text-center">
         {subTitle}
         </h4>
       {button && <div ref={buttonRef}><UIButton.Primary
       onClick={() => {
         if (!buttonHandler) smoothScrollAlmostToBottom(2000, 200)
       }}
-      className="w-[400px] transition-all delay-50 ease-linear hover:bg-opacity-0 hover:border-[2px] hover:border-primary rounded-[10px]">
+      className="w-[320px] sm:w-[400px] transition-all delay-50 ease-linear hover:bg-opacity-0 hover:border-[2px] hover:border-primary rounded-[10px]"
+      >
         <p className="text-white100 font-bold text-2xl">{button}</p>
       </UIButton.Primary></div>}
     </div>

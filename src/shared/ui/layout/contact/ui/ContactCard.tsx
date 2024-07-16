@@ -5,8 +5,8 @@ import { IContact } from "../model";
 
 export const ContactCard = ({contacts} : {contacts : IContact}) => {
   const {phone, mail, address} = contacts.attributes;
-  return <div className="max-w-[50%]">
-  <h1 className="text-white100 font-bold text-[50px] mb-7">
+  return <div className="w-full lg:max-w-[50%]">
+  <h1 className="text-white100 font-bold text-3xl mt-5 lg:mt-0 md:text-[50px] mb-7">
     Свяжитесь с <span className="text-primary">нами</span>
   </h1>
   <div className="bg-primary">
@@ -18,15 +18,15 @@ export const ContactCard = ({contacts} : {contacts : IContact}) => {
     <div className="flex flex-col gap-y-[10px] pl-[30px] py-[30px]">
       <div className="flex gap-x-3 items-center">
         <PhoneIcon className={"w-9 h-9 fill-white100"}/>
-        <p className="font-medium text-lg text-white100">{phone}</p>
+        <p className="font-medium text-md sm:text-lg text-white100">{phone}</p>
       </div>
       <div className="flex gap-x-3 items-center">
         <MailIcon className={"w-9 h-9 fill-white100"}/>
-        <p className="font-medium text-lg text-white100">{mail}</p>
+        <p className="font-medium text-md sm:text-lg text-white100">{mail}</p>
       </div>
       <div className="flex gap-x-3 items-center">
         <LocationIcon className={"w-9 h-9 fill-white100"}/>
-        <p className="font-medium text-lg text-white100">{address}</p>
+        <p className="font-medium text-md sm:text-lg text-white100">{address}</p>
       </div>
     </div>
   </div>

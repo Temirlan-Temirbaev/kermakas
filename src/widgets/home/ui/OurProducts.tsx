@@ -32,8 +32,8 @@ export const OurProducts = ({initialData} : {initialData: IProduct[]}) => {
   // if (!data || isLoading) return <div>Загрузка...</div>
   return <div className="w-full bg-white95" ref={containerRef}>
     <div className="w-full max-w-[1200px] mx-auto h-full flex flex-col items-center pt-[30px]">
-      <h1 className="text-[60px] font-bold text-black mb-10">Наша <span className="text-primary">продукция</span></h1>
-      <div className="flex flex-row gap-x-5" ref={listRef}>
+      <h1 className="text-4xl  md:text-[60px] font-bold text-black mb-10">Наша <span className="text-primary">продукция</span></h1>
+      <div className="flex flex-row items-center justify-center gap-5 flex-wrap" ref={listRef}>
         {initialData.map(product => {
           return <ProductCard key={`product-card-${product.id}`} {...product} />
         })}

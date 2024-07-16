@@ -41,39 +41,39 @@ export const Contacts = ({contacts} : {contacts : IContact}) => {
   }
  
   return <div className="w-full">
-    <div className="flex mx-auto justify-between w-full h-full max-w-[1200px] py-7">
-      <div>
-        <h1 className="text-white100 font-bold text-[50px] mb-[60px]">Обсудить проект</h1>
+    <div className="flex flex-col items-center lg:flex-row mx-auto lg:items-start lg:justify-between w-full h-full max-w-[1200px] py-7 px-5 xl:px-0">
+      <div className="w-full lg:max-w-[50%]">
+        <h1 className="text-white100 font-bold text-3xl md:text-[50px] mb-[60px]">Обсудить проект</h1>
         <div className="flex flex-col gap-y-[30px]">
           <input 
           value={name}
           onChange={e => setName(e.target.value)}
           type="text" 
-          className="w-[470px] h-[50px] pl-2" 
+          className="w-full max-w-[430px] h-[50px] pl-2" 
           placeholder="Ваше имя"/>
           <input
           value={phone}
           onChange={e => setPhone(e.target.value)}
           type="text" 
-          className="w-[470px] h-[50px] pl-2" 
+          className="w-full max-w-[430px] h-[50px] pl-2" 
           placeholder="Номер телефона"/>
           <input
           value={mail}
           onChange={e => setMail(e.target.value)}
           type="text" 
-          className="w-[470px] h-[50px] pl-2" 
+          className="w-full max-w-[430px] h-[50px] pl-2" 
           placeholder="Почта"/>
           <input 
           value={message}
           onChange={e => setMessage(e.target.value)}
           type="text" 
-          className="w-[470px] h-[50px] pl-2" 
+          className="w-full max-w-[430px] h-[50px] pl-2" 
           placeholder="Сообщение"/>
-          <UIButton.Primary 
+          <UIButton.Secondary 
           onClick={submitHandler}
-          className="hover:bg-opacity-0 hover:border-primary hover:border-[1px] delay-50 transition-all ease-linear">
+          className="hover:bg-opacity-0 hover:border-primary hover:border-[1px] delay-50 transition-all ease-linear w-full max-w-[430px]">
             <p className="text-white100 font-bold text-2xl">Оставить заявку</p>
-          </UIButton.Primary>
+          </UIButton.Secondary>
         </div>
       </div>
       <ContactCard contacts={contacts} />

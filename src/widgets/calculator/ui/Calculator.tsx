@@ -19,14 +19,15 @@ export const Calculator = () => {
     setPrice(getPrice(product, square))
   }
 
-  return <div className="w-full h-[400px] bg-black">
-    <div className="w-full max-w-[1200px] h-full mx-auto py-5 flex flex-col items-center">
-      <h1 className="text-white100 font-bold text-[50px] mb-20">Получить рассчет</h1>
-      <div className="flex gap-x-[30px] items-center mb-10">
+  return <div className="w-full bg-black">
+    <div className="w-full max-w-[1200px] h-full mx-auto py-5 flex flex-col justify-center items-center">
+      <h1 className="text-white100 font-bold text-3xl sm:text-[50px] mb-20">Получить рассчет</h1>
+      <div className="flex gap-[30px] items-center mb-10 flex-wrap flex-col lg:flex-row justify-center">
+
         <div className="-mt-7">
           <p className="text-lg opacity-80 text-white100 font-light">Площадь м^2</p>
           <input
-            className="pl-2 w-[270px] h-[50px] bg-white100 rounded-lg"
+            className="pl-2 w-[300px] h-[50px] bg-white100 rounded-lg"
             placeholder={String(square)}
             type="number" 
             value={square} 
@@ -57,7 +58,7 @@ export const Calculator = () => {
           </p>
         </UIButton.Secondary>
       </div>
-      <div className="w-[300px] min-h-[50px] rounded-lg bg-primary flex items-center justify-center mb-2">
+      <div className="w-[250px] min-h-[50px] rounded-lg bg-primary flex items-center justify-center mb-2">
         <p className="font-normal text-white100 text-xl">
           {price}₸
         </p>

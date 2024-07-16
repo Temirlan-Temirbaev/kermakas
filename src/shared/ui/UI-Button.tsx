@@ -13,7 +13,7 @@ type UIButtonProps = {
 const Button = ({variant, ...props} : UIButtonProps) => {
   let additionalStyles = ""
 
-  if (variant === ButtonTypes.Primary) additionalStyles = "h-[70px] bg-primary"
+  if (variant === ButtonTypes.Primary) additionalStyles = "h-[50px] sm:h-[70px] bg-primary"
   if (variant === ButtonTypes.Secondary) additionalStyles = "h-[50px] bg-primary"
   if (variant === ButtonTypes.Standard) additionalStyles = ""
   return <button

@@ -3,7 +3,7 @@ import { IAdvantage } from "../model"
 export const AdvantageCard = (advantage: IAdvantage) => {
   const {title, description, icon} = advantage.attributes
   return <div 
-  className="w-[30%] h-[370px] bg-white100 border-[1px] border-gray40 rounded-xl pl-4 relative pt-14"
+  className="w-[90%] md:w-[45%] lg:w-[30%] h-[370px] bg-white100 border-[1px] border-gray40 rounded-xl pl-4 relative pt-14"
   >
     <div className="w-[64px] h-[64px] rounded-full flex items-center justify-center bg-white95 absolute top-0 left-10 -translate-y-[32px]">
       <div 
