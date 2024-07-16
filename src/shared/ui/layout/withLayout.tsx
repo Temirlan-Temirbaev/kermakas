@@ -15,7 +15,7 @@ const withLayout = (Page: React.ComponentType, BannerOptions: BannerProps) => {
     return <div className={"flex w-full"}>
       <div className={"flex flex-col w-full"}>
         <Banner {...BannerOptions} contacts={data}/>
-        <Page {...pageProps} />
+        {/* <Page {...pageProps} /> */}
         <div style={bgStyles}>
           {data &&  <Contacts contacts={data} />}
           {data &&  <Footer contacts={data} />}        

@@ -6,7 +6,7 @@ import { IContact } from "../model";
 export const ContactCard = ({contacts} : {contacts : IContact}) => {
   const {phone, mail, address} = contacts.attributes;
   return <div className="w-full lg:max-w-[50%]">
-  <h1 className="text-white100 font-bold text-3xl mt-5 md:mt-0 md:text-[50px] mb-7">
+  <h1 className="text-white100 font-bold text-3xl mt-5 lg:mt-0 md:text-[50px] mb-7">
     Свяжитесь с <span className="text-primary">нами</span>
   </h1>
   <div className="bg-primary">

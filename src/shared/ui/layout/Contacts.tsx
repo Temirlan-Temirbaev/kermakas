@@ -41,8 +41,8 @@ export const Contacts = ({contacts} : {contacts : IContact}) => {
   }
  
   return <div className="w-full">
-    <div className="flex flex-col items-center lg:flex-row mx-auto lg:justify-between w-full h-full max-w-[1200px] py-7 px-5 xl:px-0">
-      <div>
+    <div className="flex flex-col items-center lg:flex-row mx-auto lg:items-start lg:justify-between w-full h-full max-w-[1200px] py-7 px-5 xl:px-0">
+      <div className="w-full lg:max-w-[50%]">
         <h1 className="text-white100 font-bold text-3xl md:text-[50px] mb-[60px]">Обсудить проект</h1>
         <div className="flex flex-col gap-y-[30px]">
           <input 

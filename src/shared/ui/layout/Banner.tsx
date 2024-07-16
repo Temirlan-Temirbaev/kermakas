@@ -57,7 +57,7 @@ export const Banner = ({title, subTitle, button, children, contacts, buttonHandl
 
   return <div style={bannerBgStyles} ref={containerRef}>
       {contacts && <Header contacts={contacts}/>}
-      <div className={`w-full mx-auto  max-w-[1200px] border-x-[1px] ${DEFAULT_BORDER} h-[840px] flex flex-col justify-center items-center`}>
+      {/* <div className={`w-full mx-auto  max-w-[1200px] border-x-[1px] ${DEFAULT_BORDER} h-[840px] flex flex-col justify-center items-center`}>
       <h1 
       ref={titleRef}
       className="text-[36px] font-bold text-white100 mb-5 text-center">
@@ -78,6 +78,6 @@ export const Banner = ({title, subTitle, button, children, contacts, buttonHandl
     </div>
     <div className={`w-full h-[120px]  border-t-[1px] ${DEFAULT_BORDER}`}>
       <div className={`w-full mx-auto  max-w-[1200px] h-full border-x-[1px] ${DEFAULT_BORDER}`}></div>
-    </div>
+    </div> */}
   </div>
 }
