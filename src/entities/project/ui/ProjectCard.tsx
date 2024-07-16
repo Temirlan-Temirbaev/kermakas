@@ -7,7 +7,7 @@ export const ProjectCard = ({id, attributes} : IProject) => {
   const {title, description, image} = attributes
   const {url} = image.data.attributes
   return <div 
-  className="w-[40%] shadow-xl hover:-translate-y-2.5 delay-50 ease-in transition-all">
+  className="w-full md:w-[45%] shadow-xl hover:-translate-y-2.5 delay-50 ease-in transition-all">
     <img 
     alt=""
     className="w-full h-[300px]" 
