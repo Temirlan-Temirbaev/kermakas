@@ -1,19 +1,33 @@
-import BannerImage from "@/../public/images/products-bg.png"
+import { getCompanyInfo, ICompanyInfo } from "@/entities/company-info"
+import { getProducts } from "@/entities/product"
 import { BannerProps } from "@/shared/ui/layout/Banner"
 import withLayout from "@/shared/ui/layout/withLayout"
+import { InfoBlock } from "@/shared/ui/strapi/InfoBlock"
 import { UIButton } from "@/shared/ui/UI-Button"
 import { smoothScrollAlmostToBottom } from "@/shared/utils/smoothScroll"
+import { Calculator } from "@/widgets/calculator"
+import { OurProducts } from "@/widgets/home"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import ScrollTrigger from "gsap/dist/ScrollTrigger"
-import Image from "next/image"
 import { useRouter } from "next/router"
 import { useRef } from "react"
+import useSWR from "swr"
 
 gsap.registerPlugin(useGSAP)
 gsap.registerPlugin(ScrollTrigger)
 
-const AboutUs = () => {
+export const getServerSideProps = async () => {
+  const pageInfo = await getCompanyInfo()
+  return {
+    props: {
+      pageInfo
+    },
+  };
+}
+
+const AboutUs = ({pageInfo} : {pageInfo : ICompanyInfo}) => {
+  const {data, isLoading} = useSWR("/api/getProducts", () => getProducts())
   const router = useRouter()
   const bannerRefs = {
     containerRef : useRef<HTMLDivElement | null>(null),
@@ -24,12 +38,14 @@ const AboutUs = () => {
 
   const productionRefs = {
     title : useRef<HTMLHeadingElement | null>(null),
-    list : useRef<HTMLUListElement | null>(null),
+    info : useRef<HTMLDivElement | null>(null),
     container : useRef<HTMLDivElement | null>(null),
     button : useRef<HTMLDivElement | null>(null),
     image : useRef<HTMLImageElement | null>(null),
     smallImage : useRef<HTMLImageElement | null>(null),
   }
+  
+  const productionImageUrl = process.env.NEXT_PUBLIC_API_BASE_URL + pageInfo.attributes.production_image.data.attributes.url
 
   useGSAP(() => {
     const {titleRef, subTitleRef, buttonRef, containerRef} = bannerRefs
@@ -52,9 +68,9 @@ const AboutUs = () => {
   }, {scope : bannerRefs.containerRef})
 
   useGSAP(() => {
-    const {title, list, button, image, container, smallImage} = productionRefs
-    if (title.current && list.current && button.current && image.current) {
-      gsap.from([title.current, list.current, button.current], {
+    const {title, info, button, image, container, smallImage} = productionRefs
+    if (title.current && info.current && button.current && image.current) {
+      gsap.from([title.current, info.current, button.current], {
         opacity: 0,
         x: -300,
         duration: .6,
@@ -82,15 +98,16 @@ const AboutUs = () => {
       })
     }
   }, {scope : productionRefs.container})
+  if (!data || isLoading) return 'Loading'
 
   return <div className="w-full">
     <div className="w-full max-w-[1200px] mx-auto">
       <div className="flex flex-col gap-y-5 min-h-[80vh] justify-center items-center w-full p-5" ref={bannerRefs.containerRef}>
         <h1 className="text-3xl font-bold text-black text-center" ref={bannerRefs.titleRef}>
-          ЗАВОД ПО ПРОИЗВОДСТВУ СЭНДВИЧ-ПАНЕЛЕЙ <span className="text-primary">KERMAKAS</span>
+          {pageInfo.attributes.title}
         </h1>
         <p className="text-black opacity-70 px-5 text-center text-sm sm:text-base" ref={bannerRefs.subTitleRef}>
-        Завод по производству сэндвич-панелей «KERMAKAS» - отечественный производитель высокотехнологичных строительных материалов с 2009 года. Мы выпускаем стеновые и кровельные сэндвич-панели с надёжным замком системой Z-LOCK, используя современное оборудование и последние технологические инновации. Автоматизированное производство сэндвич-панелей расположено на территорий Промзоны 71 разъезда в пос. Боралдай Алматинской области. 
+          {pageInfo.attributes.info}
         </p>
         <div ref={bannerRefs.buttonRef}>
           <UIButton.Secondary 
@@ -107,31 +124,17 @@ const AboutUs = () => {
           <h1
           ref={productionRefs.title}
           className="text-black font-bold text-5xl mb-5">
-            Наша 
-            <span className="text-primary">
-              {' '}продукция
-            </span>
+            {pageInfo.attributes.production_title}
           </h1>
-          <Image alt="" className="flex md:hidden " src={BannerImage} ref={productionRefs.smallImage}/>
-          <ul 
-            ref={productionRefs.list}
-            className="list-disc ml-5 text-black text-opacity-60 text-xl flex flex-col gap-y-3 mb-5">
-            <li>
-              Собственные линии производства
-            </li>
-            <li>
-              Быстрые сроки
-            </li>
-            <li>
-              Высокое качество
-            </li>
-            <li>
-              Низкая стоимость от производителя
-            </li>
-            <li>
-              Цена от завода производителя
-            </li>
-          </ul>
+          <img alt="" className="flex md:hidden " src={productionImageUrl} ref={productionRefs.smallImage}/>
+          <div 
+            ref={productionRefs.info}
+            
+            className="text-black text-opacity-60 text-xl flex flex-col gap-y-3 mb-5">
+            <p dangerouslySetInnerHTML={{ __html: pageInfo.attributes.production_info.replace(/\n/g, '<br>') }}>
+
+            </p>
+        </div>
           <div ref={productionRefs.button}>
             <UIButton.Secondary 
               onClick={() => router.push("/products")}
@@ -142,8 +145,17 @@ const AboutUs = () => {
             </UIButton.Secondary>
           </div>
         </div>
-        <Image alt="" className="hidden md:flex max-w-[50%] h-full" src={BannerImage} ref={productionRefs.image}/>
+        <img alt="" className="hidden md:flex max-w-[50%] h-full" src={productionImageUrl} ref={productionRefs.image}/>
       </div>
+      <div className="my-10">
+        <OurProducts initialData={data} withTitle={false} />
+      </div>
+    </div>
+    <Calculator />
+    <div className="w-full max-w-[1200px] mx-auto">
+      {pageInfo.attributes.blocks.map((block, i) => {
+        return <InfoBlock {...block} isEven={i % 2 === 0} key={`company-info-block-${i}`}/>
+      })}
     </div>
   </div>
 }
@@ -154,4 +166,6 @@ const bannerProps : BannerProps = {
   children : <></>
 }
 
+
+// @ts-ignore
 export default withLayout(AboutUs, bannerProps)

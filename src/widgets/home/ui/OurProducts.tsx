@@ -1,14 +1,13 @@
-import { getProducts, IProduct, ProductCard } from "@/entities/product"
+import { IProduct, ProductCard } from "@/entities/product"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
 import { useRef } from "react"
-import useSWR from "swr"
 import ScrollTrigger from "gsap/dist/ScrollTrigger"
 
 gsap.registerPlugin(useGSAP)
 gsap.registerPlugin(ScrollTrigger)
 
-export const OurProducts = ({initialData} : {initialData: IProduct[]}) => {
+export const OurProducts = ({initialData, withTitle = true} : {initialData: IProduct[], withTitle? : boolean}) => {
   // const {data, isLoading} = useSWR("/api/getProducts/limit=3", () => getProducts(3))
   const containerRef = useRef<HTMLDivElement | null>(null)
   const listRef = useRef<HTMLDivElement | null>(null)
@@ -32,7 +31,7 @@ export const OurProducts = ({initialData} : {initialData: IProduct[]}) => {
   // if (!data || isLoading) return <div>Загрузка...</div>
   return <div className="w-full bg-white95" ref={containerRef}>
     <div className="w-full max-w-[1200px] mx-auto h-full flex flex-col items-center pt-[30px]">
-      <h1 className="text-4xl  md:text-[60px] font-bold text-black mb-10">Наша <span className="text-primary">продукция</span></h1>
+      {withTitle && <h1 className="text-4xl  md:text-[60px] font-bold text-black mb-10">Наша <span className="text-primary">продукция</span></h1>      }
       <div className="flex flex-row items-center justify-center gap-5 flex-wrap" ref={listRef}>
         {initialData.map(product => {
           return <ProductCard key={`product-card-${product.id}`} {...product} />
