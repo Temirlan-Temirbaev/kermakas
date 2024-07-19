@@ -9,7 +9,8 @@ export default function Document() {
         <meta name="keywords" content="сэндвич панели, сэндвич панели алматы, кровельные сэндвич панели, кровельные сэндвич панели алматы, стеновые сэндвич панели, стеновые сэндвич панели алматы, качественные сэндвич панели, качественные сэндвич панели алматы, поставщик сэндвич панелей, поставщик сэндвич панелей алматы" />
         <meta name="author" content="Kermakas" />
         <meta name="robots" content="index, follow" />
-      </Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        </Head>
       <body>
         <Main />
         <NextScript />
