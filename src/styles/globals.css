@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow: hidden;
+}
+
 body {
   font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
