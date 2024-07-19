@@ -11,7 +11,7 @@ export const ProjectCard = ({id, attributes} : IProject) => {
     <img 
     alt=""
     className="w-full h-[300px]" 
-    src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${url}`} />
+    src={`${url}`} />
     <div className="pt-3 px-5 pb-10 flex flex-col gap-y-4">
       <h1 className="text-black font-bold text-4xl">
         {title}

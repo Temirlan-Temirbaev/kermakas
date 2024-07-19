@@ -11,7 +11,7 @@ export const ProjectSlide = ({id, attributes} : IProject) => {
   const {title} = attributes;
   const {url} = attributes.image.data.attributes;
   const imgBg = {
-    background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(\'${process.env.NEXT_PUBLIC_API_BASE_URL}${url}\')`,
+    background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(\'${url}\')`,
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",

@@ -58,7 +58,7 @@ export const ProjectDetailsWrapper = () => {
       <img 
         ref={imageRef}
         className="w-[90%] mx-auto"
-        src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${data.attributes.image.data.attributes.url}`} />
+        src={`${data.attributes.image.data.attributes.url}`} />
       <p ref={subTitleRef} className="text-black opacity-60 font-normal text-lg">
         {data.attributes.description}
         </p>

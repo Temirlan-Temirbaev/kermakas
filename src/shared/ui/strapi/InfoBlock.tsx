@@ -8,7 +8,7 @@ gsap.registerPlugin(useGSAP)
 gsap.registerPlugin(ScrollTrigger)
 
 export const InfoBlock = ({title, info, image, isEven} : IStrapiInfoBlock & {isEven : boolean}) => {
-  const imageUrl = process.env.NEXT_PUBLIC_API_BASE_URL + image.data.attributes.url
+  const imageUrl = image.data.attributes.url
   
   const titleRef = useRef<HTMLHeadingElement | null>(null)
   const infoRef = useRef<HTMLParagraphElement | null>(null)
@@ -49,7 +49,7 @@ export const InfoBlock = ({title, info, image, isEven} : IStrapiInfoBlock & {isE
 
   if (!isEven) {
     return <div className="flex justify-between items-start py-20 px-5 gap-x-5 min-h-[60vh]" ref={containerRef}>
-    <img alt="" className="hidden md:flex max-w-[50%]" src={imageUrl} ref={imageRef}/>
+    <img alt="" className="hidden md:flex min-w-[50%]" src={imageUrl} ref={imageRef}/>
     <div className="w-full flex flex-col gap-y-5 items-start md:w-1/2">
       <h1 className="font-bold text-black text-4xl" ref={titleRef}>
           {title}
@@ -78,6 +78,6 @@ export const InfoBlock = ({title, info, image, isEven} : IStrapiInfoBlock & {isE
       ></p>
     </p>
   </div>
-  <img alt="" className="hidden md:flex max-w-[50%]" src={imageUrl} ref={imageRef}/>
+  <img alt="" className="hidden md:flex min-w-[50%]" src={imageUrl} ref={imageRef}/>
   </div>
 }

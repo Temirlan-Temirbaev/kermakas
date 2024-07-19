@@ -5,26 +5,26 @@ import ArrowIcon from "@/../public/icons/arrow.svg";
 
 export const ProductCard = ({ attributes, id }: IProduct) => {
   const { title, image, additional_info } = attributes;
-  const url = image.data.attributes.formats.small.url;
+  const url = image.data.attributes.url;
   const router = useRouter();
 
   // Define structured data object
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: title,
-    image: `${process.env.NEXT_PUBLIC_API_BASE_URL}${url}`,
-    description: additional_info.map(info => `${info.description}: ${info.value}`).join(", "),
-    offers: {
-      "@type": "Offer",
-      priceCurrency: "KZT",
-      price: attributes.price_per_meter
-    }
-  };
+  // const structuredData = {
+  //   "@context": "https://schema.org",
+  //   "@type": "Product",
+  //   name: title,
+  //   image: `${process.env.NEXT_PUBLIC_API_BASE_URL}${url}`,
+  //   description: additional_info.map(info => `${info.description}: ${info.value}`).join(", "),
+  //   offers: {
+  //     "@type": "Offer",
+  //     priceCurrency: "KZT",
+  //     price: attributes.price_per_meter
+  //   }
+  // };
 
   return (
     <div className="w-[75%] sm:w-[50%] md:w-[30%] min-h-[558px] relative bg-white100 border-2 border-gray40">
-      <img src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${url}`} alt="" className="w-full max-h-[220px]" />
+      <img src={`${url}`} alt="" className="w-full max-h-[220px]" />
       <div className="pl-5 py-3 pr-2 flex flex-col gap-y-2 max-h-[270px] overflow-y-auto">
         <h1 className="text-lg sm:text-xl text-wrap md:text-xl font-bold text-black">{title}</h1>
         {additional_info.map(info => (
@@ -42,11 +42,11 @@ export const ProductCard = ({ attributes, id }: IProduct) => {
         </div>
       </UIButton.Standard>
       
-        <script
-          type="application/ld+json"
-        >
-          {JSON.stringify(structuredData)}
-        </script>
+        {/* <script */}
+          {/* type="application/ld+json" */}
+        {/* > */}
+          {/* {JSON.stringify(structuredData)} */}
+        {/* </script> */}
     </div>
   );
 };

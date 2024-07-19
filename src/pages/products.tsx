@@ -85,7 +85,7 @@ const ProductsPage = ({productionPage} : {productionPage : IProductionPage}) => 
             </UIButton.Secondary>
           </div>
         </div>        
-        <img alt="" className="hidden sm:flex sm:max-w-[50%] h-full" src={process.env.NEXT_PUBLIC_API_BASE_URL + productionPage.attributes.banner.data.attributes.url} ref={bannerRefs.image}/>
+        <img alt="" className="hidden sm:flex sm:min-w-[50%] h-full" src={productionPage.attributes.banner.data.attributes.url} ref={bannerRefs.image}/>
       </div>
       {productionPage.attributes.blocks.map((block, i) => {
         return <InfoBlock {...block} isEven={i % 2 === 0} key={`production-info-block-${i}`}/>

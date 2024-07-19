@@ -25,7 +25,7 @@ const Certificates = () => {
   }
 
   const images = data.map((image) => {
-    return `${process.env.NEXT_PUBLIC_API_BASE_URL}${image.attributes.image.data.attributes.url}`
+    return `${image.attributes.image.data.attributes.url}`
   })
   
   return <div className="w-full">

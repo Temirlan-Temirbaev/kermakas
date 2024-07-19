@@ -9,7 +9,7 @@ export const AdvantageCard = (advantage: IAdvantage) => {
       <div 
       className="w-[48px] h-[48px] rounded-full flex items-center justify-center bg-primary">
         <img 
-        src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${icon.data.attributes.url}`} 
+        src={`${icon.data.attributes.url}`} 
         className={"w-5 h-5 fill-white100"} 
         alt={icon.data.attributes.name}/>
       </div>

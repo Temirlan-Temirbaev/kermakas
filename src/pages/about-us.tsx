@@ -45,7 +45,7 @@ const AboutUs = ({pageInfo} : {pageInfo : ICompanyInfo}) => {
     smallImage : useRef<HTMLImageElement | null>(null),
   }
   
-  const productionImageUrl = process.env.NEXT_PUBLIC_API_BASE_URL + pageInfo.attributes.production_image.data.attributes.url
+  const productionImageUrl = pageInfo.attributes.production_image.data.attributes.url
 
   useGSAP(() => {
     const {titleRef, subTitleRef, buttonRef, containerRef} = bannerRefs
@@ -145,7 +145,7 @@ const AboutUs = ({pageInfo} : {pageInfo : ICompanyInfo}) => {
             </UIButton.Secondary>
           </div>
         </div>
-        <img alt="" className="hidden md:flex max-w-[50%] h-full" src={productionImageUrl} ref={productionRefs.image}/>
+        <img alt="" className="hidden md:flex min-w-[50%] h-full" src={productionImageUrl} ref={productionRefs.image}/>
       </div>
       <div className="my-10">
         <OurProducts initialData={data} withTitle={false} />
