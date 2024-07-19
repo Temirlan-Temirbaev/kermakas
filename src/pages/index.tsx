@@ -19,13 +19,13 @@ export const getStaticProps = async () => {
 };
 function Home({processData, projects, products} : {processData: IProductionProcess[], projects: IProject[], products: IProduct[]}) {
   return (
-    <>
+    <div className="w-full">
       <OurProducts initialData={products} />
       <ProductionProcess initialData={processData} />
       <Calculator />
       <OurAdvantages />
       <OurProjects initialData={projects} />
-    </>
+    </div>
   );
 }
 
