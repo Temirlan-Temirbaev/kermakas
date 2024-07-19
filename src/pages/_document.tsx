@@ -11,7 +11,7 @@ export default function Document() {
         <meta name="robots" content="index, follow" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
         </Head>
-      <body className="overflow-x-hidden">
+      <body className="max-w-[100vw] overflow-x-hidden">
         <Main />
         <NextScript />
       </body>
