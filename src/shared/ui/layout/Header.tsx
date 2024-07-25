@@ -1,3 +1,4 @@
+import Logo from "@/../public/logo.png";
 import { DEFAULT_BORDER } from "@/shared/constants/layout/borderStyle"
 import { HEADER_LINKS } from "@/shared/constants/layout/headerLinks"
 import Link from "next/link"
@@ -7,6 +8,7 @@ import { useEffect, useRef, useState } from 'react'
 import gsap from "gsap"
 import {Flip} from "gsap/dist/Flip"
 import { useOutsideClick } from "@/shared/utils/useOutsideClick"
+import Image from "next/image";
 
 gsap.registerPlugin(Flip);
 
@@ -54,7 +56,8 @@ export const Header = ({ contacts }: { contacts: IContact }) => {
   return (
     <header className={`w-full h-[120px] border-b-[1px]  ${DEFAULT_BORDER}`}>
       <div className={`max-w-[1200px] w-full h-full mx-auto  border-x-[1px]  ${DEFAULT_BORDER} flex items-center justify-between`}>
-        <h1 className="ml-5 sm:text-lg md:text-xl lg:text-3xl text-white100">KERMAKAS</h1>
+        {/* <h1 className="ml-5 sm:text-lg md:text-xl lg:text-3xl text-white100">KERMAKAS</h1> */}
+        <Image src={Logo} alt="" onClick={() => router.push("/")} className="w-20 h-20 ml-5 cursor-pointer" />
         <nav className="hidden md:flex gap-x-8">
           {HEADER_LINKS.map(link => {
             const activeStyles = "opacity-100 underline"
